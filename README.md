@@ -1,5 +1,7 @@
 # PostAir Weather API - Automated Baseline Test Suite
 
+![Build Status](https://github.com/xfxradeon/postair-api-baseline-test-suite/actions/workflows/api-tests.yml/badge.svg)
+
 An automated API regression test suite built in Postman, featuring hierarchical test inheritance, local mock service emulation, and batch execution via Postman Collection Runner and Newman CLI.
 
 ## Key Highlights
@@ -13,14 +15,3 @@ An automated API regression test suite built in Postman, featuring hierarchical 
 - `GET /turbulence` - Status, SLA, Content-Type validation
 - `GET /forecast` - Status, SLA, Content-Type validation
 - `GET /metars` - Status, SLA, Content-Type validation
-
-## How to Run Locally
-
-### 1. Start the Mock Server
-```bash
-node mock-server.js
-
-Run via Newman (CLI Automation)
-
-npm install -g newman
-newman run PostAir_Weather_API.postman_collection.json -e PostAirTesting.postman_environment.json
