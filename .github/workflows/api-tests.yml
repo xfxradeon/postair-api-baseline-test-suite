@@ -1,0 +1,32 @@
+name: Run Postman API Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Start Mock Server in Background
+        run: node mock-server.js &
+
+      - name: Wait for Mock Server to Start
+        run: sleep 3
+
+      - name: Execute Postman Baseline Suite
+        run: |
+          newman run "PostAir Weather API.postman_collection.json" -e "PostAirTesting.postman_environment.json"
